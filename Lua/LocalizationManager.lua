@@ -31,5 +31,5 @@ Hooks:Add("LocalizationManagerPostInit", "LocalizationManagerPostInit_BangHUD", 
 	if language_filename then
 		loc:load_localization_file(BangHUD._path .. 'Loc/' .. language_filename)
 	end
-	loc:load_localization_file(BangHUD._path .. "Loc/english.json")
+	loc:load_localization_file(BangHUD._path .. "Loc/english.json", false)
 end)
