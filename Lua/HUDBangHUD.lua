@@ -88,7 +88,7 @@ function HUDBangHUD:init(hud)
 		layer = 2
 	})
 
-	self._max_downs = managers.crime_spree:modify_value("PlayerDamage:GetMaximumLives", (Global.game_settings.difficulty == "sm_wish" and 2 or tweak_data.player.damage.LIVES_INIT) + managers.player:upgrade_value("player", "additional_lives", 0)) - 1
+	self._max_downs = managers.modifiers:modify_value("PlayerDamage:GetMaximumLives", (Global.game_settings.difficulty == "sm_wish" and 2 or tweak_data.player.damage.LIVES_INIT) + managers.player:upgrade_value("player", "additional_lives", 0)) - 1
 	self._downs = self._max_downs
 	self._downs_counter = OutlineText:new(self._banghud_panel, {
 		text = (BangHUD:GetOption("show_downs_counter_skull") and utf8.char(57364) or "") .. self._downs,
