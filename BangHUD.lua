@@ -32,7 +32,7 @@ if not BangHUD.setup then
 				self._data[k] = v
 			end
 		end
-		self:Save()
+		--self:Save()
 	end
 
 	function BangHUD:GetOption(id)
