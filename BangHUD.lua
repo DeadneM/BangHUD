@@ -6,13 +6,6 @@ if not BangHUD.setup then
 	BangHUD._lua_path = ModPath .. "Lua/"
 	BangHUD._data_path = SavePath .. "BangHUD.json"
 	BangHUD._data = {}
-	BangHUD._hook_files = {
-		["lib/managers/menumanager"] = "MenuManager",
-		["lib/managers/localizationmanager"] = "LocalizationManager",
-		["lib/managers/hudmanagerpd2"] = "HUDManagerPD2",
-		["lib/managers/group_ai_states/groupaistatebase"] = "GroupAIStateBase",
-		["lib/units/beings/player/playerdamage"] = "PlayerDamage"
-	}
 
 	function BangHUD:Save()
 		local file = io.open(self._data_path, "w+")
@@ -55,32 +48,6 @@ if not BangHUD.setup then
 		dofile(BangHUD._lua_path .. fileName .. ".lua")
 	end
 
-	function BangHUD:createDirectory(path)
-		local current = ""
-		path = Application:nice_path(path, true):gsub("\\", "/")
-		for folder in string.gmatch(path, "([^/]*)/") do
-			current = Application:nice_path(current .. folder, true)
-			if not file.DirectoryExists(current) then
-				if SystemFS and SystemFS.make_dir then
-					SystemFS:make_dir(current) -- windows
-				elseif file and file.CreateDirectory then
-					file.CreateDirectory(current) -- linux
-				end
-			end
-		end
-	end
-
-	for _, update in pairs(BLT.Mods:GetMod("BangHUD"):GetUpdates()) do
-		BangHUD:createDirectory(update:GetInstallDirectory() .. "/" .. update:GetInstallFolder())
-	end
-
 	BangHUD:Load()
 	BangHUD.setup = true
-end
-
-if RequiredScript then
-	local requiredScript = RequiredScript:lower()
-	if BangHUD._hook_files[requiredScript] then
-		BangHUD:DoLuaFile(BangHUD._hook_files[requiredScript])
-	end
 end

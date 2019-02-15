@@ -45,6 +45,8 @@ function HUDManager:on_arrested(...)
 	self._hud_banghud:update_status()
 end
 
+local fx_texture = "guis/textures/banghud/teammate_effect"
+
 -- This function was originally written by "GREAT BIG BUSHY BEARD" a.k.a. "Simon".
 -- It is taken from his "Swan Song Effect" mod from here: https://modworkshop.net/mydownloads.php?action=view_down&did=681
 -- I (BangL) just optimized the code style a little, so it fits my personal taste.
@@ -55,7 +57,7 @@ function HUDManager:set_teammate_custom_radial(i, data, ...)
 		swan_song_left = hud.panel:bitmap({
 			name = "swan_song_left",
 			visible = false,
-			texture = "guis/textures/alphawipe_test",
+			texture = fx_texture,
 			layer = 0,
 			color = Color(0, 0.7, 1),
 			blend_mode = "add",
@@ -91,7 +93,7 @@ function HUDManager:set_teammate_ability_radial(i, data, ...)
 		chico_injector_left = hud.panel:bitmap({
 			name = "chico_injector_left",
 			visible = false,
-			texture = "guis/textures/alphawipe_test",
+			texture = fx_texture,
 			layer = 0,
 			color = Color(1, 0.6, 0),
 			blend_mode = "add",

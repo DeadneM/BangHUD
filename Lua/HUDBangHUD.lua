@@ -25,9 +25,9 @@ function HUDBangHUD:init(hud)
 	self._banghud_panel:set_center(self._banghud_panel:parent():w() / 2, self._banghud_panel:parent():h() / 2)
 
 	self._texture_sidelen = 512
-	local armor_texture = "guis/textures/trial_diamondheist"
-	local health_texture = "guis/textures/trial_slaughterhouse"
-	local border_texture = "guis/textures/trial_street"
+	local armor_texture = "guis/textures/banghud/arcs/white"
+	local health_texture = "guis/textures/banghud/arcs/green"
+	local border_texture = "guis/textures/banghud/arcs/border"
 
 	self._armor_arc = self._banghud_panel:bitmap({
 		name = "armor_arc",

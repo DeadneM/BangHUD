@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<assets base_path="Assets/" load="startup">
+	<group name="guis/textures/banghud/" path="Assets/">
+		<file :name="teammate_effect.texture" :path="teammate_effect.texture"/>
+		<group :name="arcs/" :path="arcs/">
+			<file :name="white.texture" :path="white.texture"/>
+			<file :name="green.texture" :path="green.texture"/>
+			<file :name="border.texture" :path="border.texture"/>
+		</group>
+	</group>
+</assets>

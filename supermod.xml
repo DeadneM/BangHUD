@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<mod>
+	<hooks script_path="Lua/">
+		<group hook_id="lib/">
+			<pre hook_id="entry" script_path="BangHUD.lua"/>
+			<group :hook_id="managers/">
+				<post :hook_id="group_ai_states/groupaistatebase"	:script_path="GroupAIStateBase.lua"/>
+				<post :hook_id="hudmanagerpd2"						:script_path="HUDManagerPD2.lua"/>
+				<post :hook_id="localizationmanager"				:script_path="LocalizationManager.lua"/>
+				<post :hook_id="menumanager"						:script_path="MenuManager.lua"/>
+			</group>
+			<post :hook_id="units/beings/player/playerdamage"		:script_path="PlayerDamage.lua"/>
+		</group>
+	</hooks>
+
+	<!-- Include BangHUD textures -->
+	<:include src="Assets/assets.xml" />
+</mod>
