@@ -1,12 +1,5 @@
 BangHUD:DoLuaFile("OutlineText")
 
-local function round(val, dec)
-	dec = math.pow(10, dec or 0)
-	val = val * dec
-	val = val >= 0 and math.floor(val + 0.5) or math.ceil(val - 0.5)
-	return val / dec
-end
-
 HUDBangHUD = HUDBangHUD or class()
 
 function HUDBangHUD:init(hud)
@@ -208,7 +201,7 @@ end
 
 function HUDBangHUD:update_armor_timer(t)
 	if t and t > 0 then
-		t = string.format("%.1f", round(t, 1)) .. "s"
+		t = string.format("%.1f", self:_round(t, 1)) .. "s"
 		self._armor_timer:set_text(t)
 		self._armor_timer:set_visible(true)
 	elseif self._armor_timer:visible() then
@@ -218,7 +211,7 @@ end
 
 function HUDBangHUD:update_invincibility_timer(t)
 	if t and t > 0 then
-		t = string.format("%.1f", round(t, 1)) .. "s"
+		t = string.format("%.1f", self:_round(t, 1)) .. "s"
 		self._invincibility_timer:set_text(t)
 		self._invincibility_timer:set_visible(true)
 	elseif self._invincibility_timer:visible() then
@@ -298,4 +291,11 @@ end
 
 function HUDBangHUD:_max_health_reduction()
 	return managers.player and managers.player:upgrade_value("player", "max_health_reduction", 1) or 1
+end
+
+function HUDBangHUD:_round(val, dec)
+	dec = math.pow(10, dec or 0)
+	val = val * dec
+	val = val >= 0 and math.floor(val + 0.5) or math.ceil(val - 0.5)
+	return val / dec
 end
