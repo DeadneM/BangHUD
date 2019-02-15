@@ -6,6 +6,8 @@
 	"y_offset": -18,
 	"bars_alpha": 0.35,
 	"background_alpha": 0.3,
+	"armor_animation_time": 0.2,
+	"heath_animation_time": 0.2,
 	"stealth_behaviour": 2,
 	"loud_behaviour": 2,
 	"frenzy_handling": 2,

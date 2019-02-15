@@ -94,6 +94,30 @@
 			"default_value": 0.3
 		},
 		{
+			"type": "slider",
+			"id": "armor_animation_time",
+			"title": "armor_animation_time",
+			"description": "armor_animation_time_desc",
+			"callback": "banghud_menu_callback",
+			"value": "armor_animation_time",
+			"max": 10,
+			"min": 0,
+			"step": 0.1,
+			"default_value": 0.2
+		},
+		{
+			"type": "slider",
+			"id": "health_animation_time",
+			"title": "health_animation_time",
+			"description": "health_animation_time_desc",
+			"callback": "banghud_menu_callback",
+			"value": "health_animation_time",
+			"max": 10,
+			"min": 0,
+			"step": 0.1,
+			"default_value": 0.2
+		},
+		{
 			"type": "divider",
 			"size": 16
 		},

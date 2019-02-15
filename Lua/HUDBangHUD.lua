@@ -22,8 +22,18 @@ function HUDBangHUD:init(hud)
 	local health_texture = "guis/textures/banghud/arcs/green"
 	local border_texture = "guis/textures/banghud/arcs/border"
 
-	self._armor_arc = self._banghud_panel:bitmap({
-		name = "armor_arc",
+	self._armor_panel = self._banghud_panel:panel()
+	self._armor_arc_bg = self._banghud_panel:bitmap({
+		name = "armor_arc_bg",
+		texture = border_texture,
+		color = Color.white,
+		w = self._texture_sidelen,
+		h = self._texture_sidelen,
+		blend_mode = "normal",
+		layer = 0
+	})
+	self._armor_fade_arc = self._armor_panel:bitmap({
+		name = "armor_fade_arc",
 		texture = armor_texture,
 		color = Color.white,
 		w = self._texture_sidelen,
@@ -32,34 +42,16 @@ function HUDBangHUD:init(hud)
 		render_template = "VertexColorTexturedRadial",
 		layer = 1
 	})
-	self._health_arc = self._banghud_panel:bitmap({
-		name = "health_arc",
-		texture = health_texture,
+	self._armor_arc = self._armor_panel:bitmap({
+		name = "armor_arc",
+		texture = armor_texture,
 		color = Color.white,
 		w = self._texture_sidelen,
 		h = self._texture_sidelen,
 		blend_mode = "add",
 		render_template = "VertexColorTexturedRadial",
-		layer = 1
+		layer = 2
 	})
-
-	self._armor_arc_bg = self._banghud_panel:bitmap({
-		name = "armor_arc_bg",
-		texture = border_texture,
-		color = Color.white,
-		w = self._texture_sidelen,
-		h = self._texture_sidelen,
-		blend_mode = "normal"
-	})
-	self._health_arc_bg = self._banghud_panel:bitmap({
-		name = "health_arc_bg",
-		texture = border_texture,
-		color = Color.white,
-		w = self._texture_sidelen,
-		h = self._texture_sidelen,
-		blend_mode = "normal"
-	})
-
 	self._armor_timer = OutlineText:new(self._banghud_panel, {
 		text = "0.0s",
 		color = Color.white,
@@ -68,6 +60,37 @@ function HUDBangHUD:init(hud)
 		vertical = "bottom",
 		font = tweak_data.hud_players.name_font,
 		font_size = 22,
+		layer = 3
+	})
+
+	self._health_panel = self._banghud_panel:panel()
+	self._health_arc_bg = self._banghud_panel:bitmap({
+		name = "health_arc_bg",
+		texture = border_texture,
+		color = Color.white,
+		w = self._texture_sidelen,
+		h = self._texture_sidelen,
+		blend_mode = "normal",
+		layer = 0
+	})
+	self._health_fade_arc = self._health_panel:bitmap({
+		name = "health_fade_arc",
+		texture = health_texture,
+		color = Color.white,
+		w = self._texture_sidelen,
+		h = self._texture_sidelen,
+		blend_mode = "add",
+		render_template = "VertexColorTexturedRadial",
+		layer = 1
+	})
+	self._health_arc = self._health_panel:bitmap({
+		name = "health_arc",
+		texture = health_texture,
+		color = Color.white,
+		w = self._texture_sidelen,
+		h = self._texture_sidelen,
+		blend_mode = "add",
+		render_template = "VertexColorTexturedRadial",
 		layer = 2
 	})
 	self._invincibility_timer = OutlineText:new(self._banghud_panel, {
@@ -78,7 +101,7 @@ function HUDBangHUD:init(hud)
 		vertical = "bottom",
 		font = tweak_data.hud_players.name_font,
 		font_size = 22,
-		layer = 2
+		layer = 3
 	})
 
 	self._max_downs = managers.modifiers:modify_value("PlayerDamage:GetMaximumLives", (Global.game_settings.difficulty == "sm_wish" and 2 or tweak_data.player.damage.LIVES_INIT) + managers.player:upgrade_value("player", "additional_lives", 0)) - 1
@@ -90,7 +113,7 @@ function HUDBangHUD:init(hud)
 		vertical = "top",
 		font = tweak_data.hud_players.name_font,
 		font_size = 22,
-		layer = 2
+		layer = 3
 	})
 
 	self:update()
@@ -100,33 +123,45 @@ function HUDBangHUD:update()
 	local swap = BangHUD:GetOption("swap_bars")
 	local scale = BangHUD:GetOption("bars_scale") / 3
 	local margin = BangHUD:GetOption("center_margin")
-	local alpha = BangHUD:GetOption("bars_alpha")
+	local alpha = BangHUD:GetOption("bars_alpha") / 2
 	local bg_alpha = BangHUD:GetOption("background_alpha")
 	local x_offset = BangHUD:GetOption("x_offset")
 	local y_offset = BangHUD:GetOption("y_offset")
 
 	self._armor_arc:set_size(self._texture_sidelen * scale, self._texture_sidelen * scale)
 	self._health_arc:set_size(self._texture_sidelen * scale, self._texture_sidelen * scale)
+	self._armor_fade_arc:set_size(self._texture_sidelen * scale, self._texture_sidelen * scale)
+	self._health_fade_arc:set_size(self._texture_sidelen * scale, self._texture_sidelen * scale)
 	self._armor_arc_bg:set_size(self._texture_sidelen * scale, self._texture_sidelen * scale)
 	self._health_arc_bg:set_size(self._texture_sidelen * scale, self._texture_sidelen * scale)
 
 	if swap then
 		self._health_arc:set_center_x(self._banghud_panel:w() / 2 - margin / 2 + x_offset)
+		self._health_fade_arc:set_center_x(self._banghud_panel:w() / 2 - margin / 2 + x_offset)
 		self._armor_arc:set_center_x(self._banghud_panel:w() / 2 + margin / 2 + x_offset)
+		self._armor_fade_arc:set_center_x(self._banghud_panel:w() / 2 + margin / 2 + x_offset)
 		self._armor_arc:set_texture_rect(self._texture_sidelen, 0, -self._texture_sidelen, self._texture_sidelen)
+		self._armor_fade_arc:set_texture_rect(self._texture_sidelen, 0, -self._texture_sidelen, self._texture_sidelen)
 		self._health_arc:set_texture_rect(0, 0, self._texture_sidelen, self._texture_sidelen)
+		self._health_fade_arc:set_texture_rect(0, 0, self._texture_sidelen, self._texture_sidelen)
 		self._armor_arc_bg:set_texture_rect(self._texture_sidelen, 0, -self._texture_sidelen, self._texture_sidelen)
 		self._health_arc_bg:set_texture_rect(0, 0, self._texture_sidelen, self._texture_sidelen)
 	else
 		self._armor_arc:set_center_x(self._banghud_panel:w() / 2 - margin / 2 + x_offset)
+		self._armor_fade_arc:set_center_x(self._banghud_panel:w() / 2 - margin / 2 + x_offset)
 		self._health_arc:set_center_x(self._banghud_panel:w() / 2 + margin / 2 + x_offset)
+		self._health_fade_arc:set_center_x(self._banghud_panel:w() / 2 + margin / 2 + x_offset)
 		self._health_arc:set_texture_rect(self._texture_sidelen, 0, -self._texture_sidelen, self._texture_sidelen)
+		self._health_fade_arc:set_texture_rect(self._texture_sidelen, 0, -self._texture_sidelen, self._texture_sidelen)
 		self._armor_arc:set_texture_rect(0, 0, self._texture_sidelen, self._texture_sidelen)
+		self._armor_fade_arc:set_texture_rect(0, 0, self._texture_sidelen, self._texture_sidelen)
 		self._health_arc_bg:set_texture_rect(self._texture_sidelen, 0, -self._texture_sidelen, self._texture_sidelen)
 		self._armor_arc_bg:set_texture_rect(0, 0, self._texture_sidelen, self._texture_sidelen)
 	end
 	self._armor_arc:set_center_y(self._banghud_panel:h() / 2 + y_offset)
+	self._armor_fade_arc:set_center_y(self._banghud_panel:h() / 2 + y_offset)
 	self._health_arc:set_center_y(self._banghud_panel:h() / 2 + y_offset)
+	self._health_fade_arc:set_center_y(self._banghud_panel:h() / 2 + y_offset)
 	self._armor_arc_bg:set_center(self._armor_arc:center())
 	self._health_arc_bg:set_center(self._health_arc:center())
 
@@ -148,8 +183,8 @@ function HUDBangHUD:update()
 		self._invincibility_timer:set_align("right")
 	end
 
-	self._armor_arc:set_alpha(alpha)
-	self._health_arc:set_alpha(alpha)
+	self._armor_panel:set_alpha(alpha)
+	self._health_panel:set_alpha(alpha)
 	self._armor_arc_bg:set_alpha(bg_alpha)
 	self._health_arc_bg:set_alpha(bg_alpha)
 
@@ -182,7 +217,9 @@ function HUDBangHUD:_health_percentage()
 end
 
 function HUDBangHUD:_update_health()
+	self._health_panel:stop()
 	self._health_arc:set_color(Color(1, 0.5 + self:_health_percentage() * 0.5, 1, 1))
+	self._health_panel:animate(callback(self, self, "_health_animation"))
 	self:update_visbility()
 end
 
@@ -195,7 +232,9 @@ function HUDBangHUD:_armor_percentage()
 end
 
 function HUDBangHUD:_update_armor()
+	self._armor_panel:stop()
 	self._armor_arc:set_color(Color(1, 0.5 + self:_armor_percentage() * 0.5, 1, 1))
+	self._armor_panel:animate(callback(self, self, "_armor_animation"))
 	self:update_visbility()
 end
 
@@ -242,6 +281,34 @@ function HUDBangHUD:update_visbility()
 		self._banghud_panel:stop()
 		self._banghud_panel:animate(callback(self, self, "_fade_out_animation"))
 	end
+end
+
+function HUDBangHUD:_health_animation(panel)
+	local duration = BangHUD:GetOption("health_animation_time")
+	local t = duration
+	local health_arc = panel:child("health_arc")
+	local health_fade_arc = panel:child("health_fade_arc")
+	local final_pos = health_arc:color().r
+	local distance = health_fade_arc:color().r - final_pos
+	while t > 0 do
+		t = t - coroutine.yield()
+		health_fade_arc:set_color(Color(1, t / duration * distance + final_pos, 1, 1))
+	end
+	health_fade_arc:set_color(Color(1, final_pos, 1, 1))
+end
+
+function HUDBangHUD:_armor_animation(panel)
+	local duration = BangHUD:GetOption("armor_animation_time")
+	local t = duration
+	local armor_arc = panel:child("armor_arc")
+	local armor_fade_arc = panel:child("armor_fade_arc")
+	local final_pos = armor_arc:color().r
+	local distance = armor_fade_arc:color().r - final_pos
+	while t > 0 do
+		t = t - coroutine.yield()
+		armor_fade_arc:set_color(Color(1, t / duration * distance + final_pos, 1, 1))
+	end
+	armor_fade_arc:set_color(Color(1, final_pos, 1, 1))
 end
 
 function HUDBangHUD:_fade_out_animation(panel)

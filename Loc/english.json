@@ -23,6 +23,12 @@
 	"background_alpha": "Background alpha",
 	"background_alpha_desc": "Transparency of the background line behind the bars",
 
+	"armor_animation_time": "Armor fade time",
+	"armor_animation_time_desc": "Time of the fade animation when armor changes",
+
+	"health_animation_time": "Health fade time",
+	"health_animation_time_desc": "Time of the fade animation when health changes",
+
 	"stealth_behaviour": "Stealth behaviour",
 	"stealth_behaviour_desc": "When to hide when heist is stealth",
 
