@@ -7,10 +7,9 @@ if not BangHUD.setup then
 	BangHUD._data_path = SavePath .. "BangHUD.json"
 	BangHUD._data = {}
 	BangHUD._hook_files = {
-		["lib/managers/menumanager"] = "MenuManager",
-		["lib/managers/localizationmanager"] = "LocalizationManager",
 		["lib/managers/hudmanagerpd2"] = "HUDManagerPD2",
-		["lib/managers/group_ai_states/groupaistatebase"] = "GroupAIStateBase",
+		["lib/managers/menu/menucomponentmanager"] = "MenuComponentManager",
+		["lib/managers/playermanager"] = "PlayerManager",
 		["lib/units/beings/player/playerdamage"] = "PlayerDamage"
 	}
 
@@ -32,7 +31,6 @@ if not BangHUD.setup then
 				self._data[k] = v
 			end
 		end
-		--self:Save()
 	end
 
 	function BangHUD:GetOption(id)
@@ -56,7 +54,7 @@ if not BangHUD.setup then
 		dofile(BangHUD._lua_path .. fileName .. ".lua")
 	end
 
-	function BangHUD:createDirectory(path)
+	--[[function BangHUD:createDirectory(path)
 		local current = ""
 		path = Application:nice_path(path, true):gsub("\\", "/")
 		for folder in string.gmatch(path, "([^/]*)/") do
@@ -73,7 +71,7 @@ if not BangHUD.setup then
 
 	for _, update in pairs(BLT.Mods:GetMod("BangHUD"):GetUpdates()) do
 		BangHUD:createDirectory(update:GetInstallDirectory() .. "/" .. update:GetInstallFolder())
-	end
+	end]]
 
 	BangHUD:Load()
 	BangHUD.setup = true

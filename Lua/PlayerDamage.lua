@@ -1,25 +1,48 @@
 
-local _update_regenerate_timer_original = PlayerDamage._update_regenerate_timer
-local _update_armor_grinding_original = PlayerDamage._update_armor_grinding
-local _update_can_take_dmg_timer_original = PlayerDamage._update_can_take_dmg_timer
+local _check_bleed_out_original = PlayerDamage._check_bleed_out
+local _regenerated_original = PlayerDamage._regenerated
+local band_aid_health_original = PlayerDamage.band_aid_health
+--local damage_fall_original = PlayerDamage.damage_fall
+--local force_set_revives_original = PlayerDamage.force_set_revives
 
-function PlayerDamage:_update_regenerate_timer(...)
-	_update_regenerate_timer_original(self, ...)
+function PlayerDamage:_check_bleed_out(...)
+	local result = _check_bleed_out_original(self, ...)
 	if managers.hud and managers.hud._hud_banghud then
-		managers.hud._hud_banghud:update_armor_timer(BangHUD:GetOption("show_armor_timer") and self._regenerate_timer or 0)
+		managers.hud._hud_banghud:set_revives(Application:digest_value(self._revives, false))
 	end
+	return result
 end
 
-function PlayerDamage:_update_armor_grinding(...)
-	_update_armor_grinding_original(self, ...)
+function PlayerDamage:_regenerated(...)
+	local result = _regenerated_original(self, ...)
 	if managers.hud and managers.hud._hud_banghud then
-		managers.hud._hud_banghud:update_armor_timer((BangHUD:GetOption("show_anarchist_timer") and self:get_real_armor() < self:_max_armor()) and self._armor_grinding.target_tick - self._armor_grinding.elapsed or 0)
+		managers.hud._hud_banghud:set_revives(Application:digest_value(self._revives, false))
 	end
+	return result
 end
 
-function PlayerDamage:_update_can_take_dmg_timer(...)
-	_update_can_take_dmg_timer_original(self, ...)
+function PlayerDamage:band_aid_health(...)
+	local result = band_aid_health_original(self, ...)
 	if managers.hud and managers.hud._hud_banghud then
-		managers.hud._hud_banghud:update_invincibility_timer(BangHUD:GetOption("show_invincibility_timer") and self._can_take_dmg_timer or 0)
+		managers.hud._hud_banghud:set_revives(Application:digest_value(self._revives, false))
 	end
+	return result
 end
+
+-- damage_fall calls _check_bleed_out, so we alredy covered this case.
+--[[function PlayerDamage:damage_fall(...)
+	local result = damage_fall_original(self, ...)
+	if managers.hud and managers.hud._hud_banghud then
+		managers.hud._hud_banghud:set_revives(Application:digest_value(self._revives, false))
+	end
+	return result
+end]]
+
+-- never called
+--[[function PlayerDamage:force_set_revives(revives)
+	local result = force_set_revives_original(self, ...)
+	if managers.hud and managers.hud._hud_banghud then
+		managers.hud._hud_banghud:set_revives(Application:digest_value(self._revives, false))
+	end
+	return result
+end]]
