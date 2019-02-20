@@ -64,12 +64,12 @@
 	"chico_injector_intensity": "Kingpin injector effect intensity",
 	"chico_injector_intensity_desc": "Set the intensity of the orange kingpin injector effect",
 
-	"show_downs_counter": "Show downs counter",
-	"show_downs_counter_desc": "Shows your remaining downs above the health bar arc",
+	"show_revives_counter": "Show revives counter",
+	"show_revives_counter_desc": "Shows your remaining revives above the health bar arc",
 
-	"show_downs_counter_skull": "Show downs counter skull",
-	"show_downs_counter_skull_desc": "Shows a skull in front of your downs counter (if enabled)",
+	"show_revives_counter_skull": "Show revives counter skull",
+	"show_revives_counter_skull_desc": "Shows a skull in front of your revives counter (if enabled)",
 
-	"downs_counter_alpha": "Downs counter alpha",
-	"downs_counter_alpha_desc": "Set the transparency of the downs counter (if enabled)"
+	"revives_counter_alpha": "Revives counter alpha",
+	"revives_counter_alpha_desc": "Set the transparency of the revives counter (if enabled)"
 }

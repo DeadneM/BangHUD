@@ -7,7 +7,7 @@
 	"bars_alpha": 0.35,
 	"background_alpha": 0.3,
 	"armor_animation_time": 0.2,
-	"heath_animation_time": 0.2,
+	"health_animation_time": 0.2,
 	"stealth_behaviour": 2,
 	"loud_behaviour": 2,
 	"frenzy_handling": 2,
@@ -17,7 +17,7 @@
 	"show_invincibility_timer": true,
 	"swan_song_intensity": 1,
 	"chico_injector_intensity": 1,
-	"show_downs_counter": true,
-	"show_downs_counter_skull": false,
-	"downs_counter_alpha": 0.8
+	"show_revives_counter": true,
+	"show_revives_counter_skull": false,
+	"revives_counter_alpha": 0.8
 }

@@ -58,12 +58,12 @@
 	"chico_injector_intensity": "注射器触发效果",
 	"chico_injector_intensity_desc": "设置注射器触发后视觉效果的强度",
 
-	"show_downs_counter": "显示倒地计数器",
-	"show_downs_counter_desc": "在上方显示剩余的倒地次数",
+	"show_revives_counter": "显示倒地计数器",
+	"show_revives_counter_desc": "在上方显示剩余的倒地次数",
 
-	"show_downs_counter_skull": "显示倒地计数器图标",
-	"show_downs_counter_skull_desc": "在倒地计数器前面显示一个头骨图标(如果启用)",
+	"show_revives_counter_skull": "显示倒地计数器图标",
+	"show_revives_counter_skull_desc": "在倒地计数器前面显示一个头骨图标(如果启用)",
 
-	"downs_counter_alpha": "倒地计数器透明度",
-	"downs_counter_alpha_desc": "设置倒地计数器的透明度(如果启用)"
+	"revives_counter_alpha": "倒地计数器透明度",
+	"revives_counter_alpha_desc": "设置倒地计数器的透明度(如果启用)"
 }

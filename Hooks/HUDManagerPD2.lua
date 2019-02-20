@@ -1,4 +1,4 @@
-BangHUD:DoLuaFile("HUDBangHUD")
+BangHUD:Require("HUDBangHUD")
 
 local _setup_player_info_hud_pd2_original = HUDManager._setup_player_info_hud_pd2
 local set_teammate_health_original = HUDManager.set_teammate_health
