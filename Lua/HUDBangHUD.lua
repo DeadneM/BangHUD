@@ -1,12 +1,5 @@
 BangHUD:DoLuaFile("OutlineText")
 
-local function round(val, dec)
-	dec = math.pow(10, dec or 0)
-	val = val * dec
-	val = val >= 0 and math.floor(val + 0.5) or math.ceil(val - 0.5)
-	return val / dec
-end
-
 HUDBangHUD = HUDBangHUD or class()
 
 function HUDBangHUD:init(hud) --public
@@ -157,21 +150,8 @@ function HUDBangHUD:update() --public
 	self._health_arc:set_center_y(self._banghud_panel:h() / 2 + y_offset)
 	self._stamina_fade_arc:set_center_y(self._banghud_panel:h() / 2 + y_offset)
 	self._health_fade_arc:set_center_y(self._banghud_panel:h() / 2 + y_offset)
-
-	-- inherit bg position from arcs
 	self._stamina_arc_bg:set_center(self._stamina_arc:center())
 	self._health_arc_bg:set_center(self._health_arc:center())
-
-	-- update alpha
-	self._stamina_panel:set_alpha(alpha)
-	self._health_panel:set_alpha(alpha)
-	self._stamina_arc_bg:set_alpha(bg_alpha)
-	self._health_arc_bg:set_alpha(bg_alpha)
-
-	-- update values
-	self:_update_health()
-	self:_update_stamina()
-	self:_update_revives()
 
 	-- update revive counter position
 	self._revives_counter:set_top(self._health_arc:top())
@@ -183,6 +163,36 @@ function HUDBangHUD:update() --public
 		self._revives_counter:set_align("left")
 	end
 
+	-- update alpha
+	self._stamina_panel:set_alpha(alpha)
+	self._health_panel:set_alpha(alpha)
+	self._stamina_arc_bg:set_alpha(bg_alpha)
+	self._health_arc_bg:set_alpha(bg_alpha)
+
+	-- update values
+	self:_update_health()
+	self:_update_stamina()
+	self:_update_revives()
+end
+
+-- CORE
+
+function HUDBangHUD:_round(val, dec)
+	dec = math.pow(10, dec or 0)
+	val = val * dec
+	val = val >= 0 and math.floor(val + 0.5) or math.ceil(val - 0.5)
+	return val / dec
+end
+
+function HUDBangHUD:_check_player_state()
+	local state = managers.player:current_state() or "empty"
+	return state ~= "bleed_out" and state ~= "fatal" and state ~= "incapacitated"
+	-- other possible states are:
+	-- standard, parachuting, freefall, carry, carry_corpse, bipod, turret, foxhole, tased, driving
+end
+
+function HUDBangHUD:update_status() --public
+	self._banghud_panel:set_visible(self:_check_player_state())
 end
 
 -- HEALTH
@@ -275,17 +285,4 @@ end
 function HUDBangHUD:set_stamina(value) --public
 	self._stamina = value
 	self:_update_stamina()
-end
-
--- STATUS
-
-function HUDBangHUD:_check_player_state()
-	local state = managers.player:current_state() or "empty"
-	return state ~= "bleed_out" and state ~= "fatal" and state ~= "incapacitated"
-	-- other possible states are:
-	-- standard, parachuting, freefall, carry, carry_corpse, bipod, turret, foxhole, tased, driving
-end
-
-function HUDBangHUD:update_status() --public
-	self._banghud_panel:set_visible(self:_check_player_state())
 end
