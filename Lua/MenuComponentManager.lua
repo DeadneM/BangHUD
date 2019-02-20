@@ -126,6 +126,16 @@ function BangHUDMenu:background_alpha(value)
 	BangHUD:OptionChanged()
 end
 
+function BangHUDMenu:health_animation_time(value)
+	BangHUD._data.health_animation_time = value
+	BangHUD:OptionChanged()
+end
+
+function BangHUDMenu:stamina_animation_time(value)
+	BangHUD._data.stamina_animation_time = value
+	BangHUD:OptionChanged()
+end
+
 function BangHUDMenu:show_revives(value)
 	BangHUD._data.show_revives = value
 	BangHUD:OptionChanged()
