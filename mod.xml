@@ -13,6 +13,7 @@
 	</localization>
 	<hooks>
 		<hook source_file="lib/managers/hudmanagerpd2" file="BangHUD.lua"/>
+		<hook source_file="lib/managers/hud/hudteammateplayer" file="BangHUD.lua"/>
 		<hook source_file="lib/managers/menu/menucomponentmanager" file="BangHUD.lua"/>
 		<hook source_file="lib/managers/playermanager" file="BangHUD.lua"/>
 		<hook source_file="lib/units/beings/player/playerdamage" file="BangHUD.lua"/>

@@ -8,6 +8,7 @@ if not BangHUD.setup then
 	BangHUD._data = {}
 	BangHUD._hook_files = {
 		["lib/managers/hudmanagerpd2"] = "HUDManagerPD2",
+		["lib/managers/hud/hudteammateplayer"] = "HUDTeammatePlayer",
 		["lib/managers/menu/menucomponentmanager"] = "MenuComponentManager",
 		["lib/managers/playermanager"] = "PlayerManager",
 		["lib/units/beings/player/playerdamage"] = "PlayerDamage"

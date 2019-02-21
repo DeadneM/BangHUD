@@ -89,6 +89,21 @@ function BangHUDMenu:Init(root)
 		max = 1,
 		callback = callback(self, self, "revives_alpha"),
 	})
+	self:SubTitle({text = "", localize = false}) -- subtitle
+	self:Toggle({
+		name = "show_warcry",
+		text = "show_warcry",
+		value = BangHUD._data.show_warcry,
+		callback = callback(self, self, "show_warcry"),
+	})
+	self:Slider({
+		name = "warcry_alpha",
+		text = "warcry_alpha",
+		value = BangHUD._data.warcry_alpha,
+		min = 0,
+		max = 1,
+		callback = callback(self, self, "warcry_alpha"),
+	})
 end
 
 function BangHUDMenu:swap_bars(value)
@@ -143,6 +158,16 @@ end
 
 function BangHUDMenu:revives_alpha(value)
 	BangHUD._data.revives_alpha = value
+	BangHUD:OptionChanged()
+end
+
+function BangHUDMenu:show_warcry(value)
+	BangHUD._data.show_warcry = value
+	BangHUD:OptionChanged()
+end
+
+function BangHUDMenu:warcry_alpha(value)
+	BangHUD._data.warcry_alpha = value
 	BangHUD:OptionChanged()
 end
 

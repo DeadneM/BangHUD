@@ -54,6 +54,18 @@ function HUDBangHUD:init(hud) --public
 		layer = 2
 	})
 
+	-- REVIVES
+	self._revives = self:_max_revives()
+	self._revives_counter = OutlineText:new(self._banghud_panel, {
+		text = self._revives,
+		color = Color.white,
+		align = "left",
+		vertical = "top",
+		font = font,
+		font_size = 22,
+		layer = 3
+	})
+
 	-- STAMINA
 	self._stamina_panel = self._banghud_panel:panel()
 	self._stamina_arc_bg = self._banghud_panel:bitmap({
@@ -86,10 +98,10 @@ function HUDBangHUD:init(hud) --public
 		layer = 2
 	})
 
-	-- REVIVES
-	self._revives = self:_max_revives()
-	self._revives_counter = OutlineText:new(self._banghud_panel, {
-		text = self._revives,
+	-- WARCRY
+	self._warcry_ready = false
+	self._warcry_indicator = OutlineText:new(self._banghud_panel, {
+		text = self._warcry_ready and "W" or "",
 		color = Color.white,
 		align = "right",
 		vertical = "top",
@@ -163,6 +175,16 @@ function HUDBangHUD:update() --public
 		self._revives_counter:set_align("left")
 	end
 
+	-- update warcry indicator position
+	self._warcry_indicator:set_top(self._stamina_arc:top())
+	if swap then
+		self._warcry_indicator:set_left(self._stamina_arc:left())
+		self._warcry_indicator:set_align("left")
+	else
+		self._warcry_indicator:set_right(self._stamina_arc:right())
+		self._warcry_indicator:set_align("right")
+	end
+
 	-- update alpha
 	self._stamina_panel:set_alpha(alpha)
 	self._health_panel:set_alpha(alpha)
@@ -173,6 +195,7 @@ function HUDBangHUD:update() --public
 	self:_update_health()
 	self:_update_stamina()
 	self:_update_revives()
+	self:_update_warcry_ready()
 end
 
 -- CORE
@@ -285,4 +308,17 @@ end
 function HUDBangHUD:set_stamina(value) --public
 	self._stamina = value
 	self:_update_stamina()
+end
+
+-- WARCRY
+
+function HUDBangHUD:_update_warcry_ready()
+	self._warcry_indicator:set_text(self._warcry_ready and "W" or "")
+	self._warcry_indicator:set_visible(BangHUD:GetOption("show_warcry"))
+	self._warcry_indicator:set_alpha(BangHUD:GetOption("warcry_alpha"))
+end
+
+function HUDBangHUD:set_warcry_ready(value) --public
+	self._warcry_ready = value
+	self:_update_warcry_ready()
 end

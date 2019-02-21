@@ -9,5 +9,7 @@
 	"health_animation_time": 0.2,
 	"stamina_animation_time": 0.2,
 	"show_revives": true,
-	"revives_alpha": 0.8
+	"revives_alpha": 0.8,
+	"show_warcry": true,
+	"warcry_alpha": 0.8
 }
