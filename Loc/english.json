@@ -7,6 +7,10 @@
 	"y_offset": "Y Offset",
 	"bars_alpha": "Bars alpha",
 	"background_alpha": "Background alpha",
+	"health_animation_time": "Health fade time",
+	"stamina_animation_time": "Stamina fade time",
 	"show_revives": "Show revives",
-	"revives_alpha": "Revives alpha"
+	"revives_alpha": "Revives alpha",
+	"show_warcry": "Show warcry inticator",
+	"warcry_alpha": "Warcry alpha"
 }
