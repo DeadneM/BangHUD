@@ -1,21 +1,27 @@
 <table
-		name="BangHUD"
+		name="BangHUD-RAID"
 		description="Shows player health and stamina as arcs in the middle of the screen"
 		merge_global = "false"
 		priority="0"
 		author="BangL\n  Arc textures by Takku"
-		version="0.9"
 		cannot_be_disabled="false"
-		early_init="false"
-	>
+		early_init="false">
+
+	<auto_updates
+			provider="modworkshop"
+			id="24555"
+			version="1.0"/>
+
 	<localization directory="Loc" default="english.json">
 		<loc file="english.json" language="english"/>
 	</localization>
+
 	<hooks>
-		<hook source_file="lib/managers/hudmanagerpd2" file="BangHUD.lua"/>
-		<hook source_file="lib/managers/hud/hudteammateplayer" file="BangHUD.lua"/>
-		<hook source_file="lib/managers/menu/menucomponentmanager" file="BangHUD.lua"/>
-		<hook source_file="lib/managers/playermanager" file="BangHUD.lua"/>
-		<hook source_file="lib/units/beings/player/playerdamage" file="BangHUD.lua"/>
+		<hook source_file="lib/managers/hudmanagerpd2"					file="BangHUD.lua"/>
+		<hook source_file="lib/managers/hud/hudteammateplayer"			file="BangHUD.lua"/>
+		<hook source_file="lib/managers/menu/menucomponentmanager"		file="BangHUD.lua"/>
+		<hook source_file="lib/managers/playermanager"					file="BangHUD.lua"/>
+		<hook source_file="lib/units/beings/player/playerdamage"		file="BangHUD.lua"/>
 	</hooks>
+
 </table>

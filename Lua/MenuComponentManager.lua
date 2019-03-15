@@ -2,6 +2,14 @@
 BangHUDMenu = BangHUDMenu or class(BLTMenu)
 
 function BangHUDMenu:Init(root)
+	self:Title({
+		text = "banghud",
+	})
+	self:Label({
+		text = nil,
+		localize = false,
+		h = 8,
+	})
 	self:Toggle({
 		name = "swap_bars",
 		text = "swap_bars",
@@ -104,6 +112,15 @@ function BangHUDMenu:Init(root)
 		max = 1,
 		callback = callback(self, self, "warcry_alpha"),
 	})
+	self:LongRoundedButton2({
+		name = "banghud_reset",
+		text = "banghud_reset",
+		localize = true,
+		callback = callback(self, self, "Reset"),
+		ignore_align = true,
+		y = 832,
+		x = 1472,
+	})
 end
 
 function BangHUDMenu:swap_bars(value)
@@ -171,6 +188,28 @@ function BangHUDMenu:warcry_alpha(value)
 	BangHUD:OptionChanged()
 end
 
+function BangHUDMenu:Reset(value, item)
+	QuickMenu:new(
+		managers.localization:text("banghud_reset"),
+		managers.localization:text("banghud_reset_confirm"),
+		{
+			[1] = {
+				text = managers.localization:text("dialog_no"),
+				is_cancel_button = true,
+			},
+			[2] = {
+				text = managers.localization:text("dialog_yes"),
+				callback = function()
+					BangHUD:LoadDefaults()
+					self:ReloadMenu()
+					BangHUD:OptionChanged()
+				end,
+			},
+		},
+		true
+	)
+end
+
 function BangHUDMenu:Close()
 	BangHUD:Save()
 end
@@ -178,7 +217,7 @@ end
 Hooks:Add("MenuComponentManagerInitialize", "BangHUD.MenuComponentManagerInitialize", function(self)
 	RaidMenuHelper:CreateMenu({
 		name = "BangHUD_options",
-		name_id = "BangHUD_options",
+		name_id = "banghud",
 		inject_menu = "blt_options",
 		class = BangHUDMenu
 	})

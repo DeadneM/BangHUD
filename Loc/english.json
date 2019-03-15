@@ -1,5 +1,5 @@
 {
-	"BangHUD_options": "BangHUD options",
+	"banghud": "BangHUD",
 	"swap_bars": "Swap bars",
 	"bars_scale": "Bars scale",
 	"center_margin": "Center margin",
@@ -12,5 +12,7 @@
 	"show_revives": "Show revives",
 	"revives_alpha": "Revives alpha",
 	"show_warcry": "Show warcry inticator",
-	"warcry_alpha": "Warcry alpha"
+	"warcry_alpha": "Warcry alpha",
+	"banghud_reset" : "Default options",
+	"banghud_reset_confirm" : "Are you sure, you want to reset all BangHUD options to their default value?"
 }
