@@ -9,7 +9,7 @@
 
 	<auto_updates
 			provider="modworkshop"
-			id="24555"
+			id="24558"
 			version="1.0"/>
 
 	<localization directory="Loc" default="english.json">
