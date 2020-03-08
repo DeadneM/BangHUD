@@ -7,8 +7,5 @@
 	"priority": 0,
 	"image" : "bh.png",
 	"color" : "0.25 0.88 0.82",
-	"blt_version" : 2,
-	"updates" : [
-		{"identifier" : "banghud"}
-	]
+	"blt_version" : 2
 }
