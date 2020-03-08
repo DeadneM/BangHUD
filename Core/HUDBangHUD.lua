@@ -152,6 +152,8 @@ function HUDBangHUD:update() --public
 		self._health_arc:set_center_x(x_left)
 		self._armor_fade_arc:set_center_x(x_right)
 		self._health_fade_arc:set_center_x(x_left)
+		self._armor_arc_bg:set_center_x(x_right)
+		self._health_arc_bg:set_center_x(x_left)
 		self._armor_arc:set_texture_rect(self._texture_sidelen, 0, -self._texture_sidelen, self._texture_sidelen)
 		self._health_arc:set_texture_rect(0, 0, self._texture_sidelen, self._texture_sidelen)
 		self._armor_fade_arc:set_texture_rect(self._texture_sidelen, 0, -self._texture_sidelen, self._texture_sidelen)
@@ -163,6 +165,8 @@ function HUDBangHUD:update() --public
 		self._health_arc:set_center_x(x_right)
 		self._armor_fade_arc:set_center_x(x_left)
 		self._health_fade_arc:set_center_x(x_right)
+		self._armor_arc_bg:set_center_x(x_left)
+		self._health_arc_bg:set_center_x(x_right)
 		self._armor_arc:set_texture_rect(0, 0, self._texture_sidelen, self._texture_sidelen)
 		self._health_arc:set_texture_rect(self._texture_sidelen, 0, -self._texture_sidelen, self._texture_sidelen)
 		self._armor_fade_arc:set_texture_rect(0, 0, self._texture_sidelen, self._texture_sidelen)
@@ -177,8 +181,8 @@ function HUDBangHUD:update() --public
 	self._health_arc:set_center_y(y_center)
 	self._armor_fade_arc:set_center_y(y_center)
 	self._health_fade_arc:set_center_y(y_center)
-	self._armor_arc_bg:set_center(y_center)
-	self._health_arc_bg:set_center(y_center)
+	self._armor_arc_bg:set_center_y(y_center)
+	self._health_arc_bg:set_center_y(y_center)
 
 	-- update armor timer position
 	self._armor_timer:set_bottom(self._armor_arc:bottom())
