@@ -1,4 +1,4 @@
-<table name="BangHUD">
+<table name="BangHUD" author="BangL" color="Color(0.25, 0.88, 0.82)">
     <AssetUpdates id="BangHUD" version="1">
         <custom_provider version_api_url="https://raw.githubusercontent.com/DeadneM/BangHUD/master/Version.txt" download_url="https://github.com/DeadneM/BangHUD/archive/master.zip"/>
     </AssetUpdates>
