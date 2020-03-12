@@ -38,8 +38,8 @@
 			"value": "center_margin",
 			"max": 1500,
 			"min": -1500,
-			"step": 100,
-			"default_value": 100
+			"step": 5,
+			"default_value": 150
 		},
 		{
 			"type": "slider",
@@ -48,9 +48,9 @@
 			"description": "x_offset_desc",
 			"callback": "banghud_menu_callback",
 			"value": "x_offset",
-			"max": 1000,
-			"min": -1000,
-			"step": 1,
+			"max": 1500,
+			"min": -1500,
+			"step": 5,
 			"default_value": 0
 		},
 		{
@@ -60,9 +60,9 @@
 			"description": "y_offset_desc",
 			"callback": "banghud_menu_callback",
 			"value": "y_offset",
-			"max": 1000,
-			"min": -1000,
-			"step": 1,
+			"max": 1500,
+			"min": -1500,
+			"step": 5,
 			"default_value": 0
 		},
 		{
